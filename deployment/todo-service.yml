@@ -10,7 +10,6 @@ spec:
     - port: 80
       targetPort: http-server
       protocol: TCP
-  externalIPs:
-    - 188.166.42.144
   selector:
     name: todo
+  type: NodePort

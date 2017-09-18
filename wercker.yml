@@ -56,9 +56,9 @@ release-build:
 push-debug:
   steps:
     - internal/docker-push:
-      repository: quay.io/wercker/workflows-kubernetes-demo
-      username: $DOCKER_USERNAME
-      password: $DOCKER_PASSWORD
+      repository: quay.io/spleendog/workflows-kubernetes-demo
+      username: $QUAY_USERNAME
+      password: $QUAY_PASSWORD
       registry: quay.io
       tag: debug-$WERCKER_GIT_COMMIT
       working-dir: /pipeline/source
@@ -86,9 +86,9 @@ push-release:
 
     - internal/docker-push:
       disable-sync: true
-      repository: quay.io/wercker/workflows-kubernetes-demo
-      username: $DOCKER_USERNAME
-      password: $DOCKER_PASSWORD
+      repository: quay.io/spleendog/workflows-kubernetes-demo
+      username: $QUAY_USERNAME
+      password: $QUAY_PASSWORD
       registry: quay.io
       tag: release-$WERCKER_GIT_COMMIT
       cmd: nginx -g 'daemon off;'
