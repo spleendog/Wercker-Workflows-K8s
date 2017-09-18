@@ -139,7 +139,7 @@ kube-deploy:
 #      client-certificate: admin.pem
 #      client-key: admin-key.pem
       insecure-skip-tls-verify: true
-      command: --kubeconfig kubeconfig --namespace ${KUBE_NAMESPACE} apply -f todo.yml
+      command: --kubeconfig kubeconfig --namespace ${KUBE_NAMESPACE} apply -f todo-kube.yml
 
     - script:
       name: cleanup
