@@ -121,13 +121,25 @@ kube-deploy:
         ./t.sh todo-deployment.template.yml >> todo-kube.yml
         cat todo-kube.yml
 
+    - script:
+        name: kubeconfig template file population
+        cwd: deployment
+        code: |
+          sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
+          sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
+          sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
+          sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
+          sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig
+
     - kubectl:
       cwd: deployment
-      server: $KUBERNETES_MASTER
-      certificate-authority: ca.pem
-      client-certificate: admin.pem
-      client-key: admin-key.pem
-      command: apply -f todo-kube.yml
+      server: ${KUBE_ENDPOINT}
+      username: ${KUBE_USERNAME}
+#      certificate-authority: ca.pem
+#      client-certificate: admin.pem
+#      client-key: admin-key.pem
+      insecure-skip-tls-verify: true
+      command: --kubeconfig kubeconfig --namespace ${KUBE_NAMESPACE} apply -f todo.yml
 
     - script:
       name: cleanup
