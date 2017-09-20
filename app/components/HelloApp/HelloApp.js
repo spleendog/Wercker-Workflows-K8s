@@ -195,7 +195,7 @@ class HelloApp extends React.Component {
       <div>
         <section className='todoapp'>
           <header className='header'>
-            <h1>todos - BT</h1>
+            <h1>todos</h1>
             <input className='new-todo'
                    onKeyPress={this.handleNewTodoKeys}
                    placeholder='What needs to be done?'
